@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "aluno_tb")
+@Table(name = "aluno_id")
 public class Aluno {
 
     @Id
@@ -17,6 +20,9 @@ public class Aluno {
     private Long id;
     private String nome;
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "tb_matricula")
+    private List<Matricula> matriculas = new ArrayList<>();
 
 
 
