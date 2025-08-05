@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-public class Matricula {
+public class Matricula extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
