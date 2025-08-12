@@ -3,5 +3,5 @@ package com.example.aluno.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public record AlunoResponse(Long id, String nome, LocalDate dataNascimento, List<MatriculaDto> matriculas) {
+public record AlunoResponse(Long id, String nome, String telefone, LocalDate dataNascimento, List<MatriculaDto> matriculas) {
 }

@@ -19,6 +19,7 @@ public class Aluno extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String telefone;
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "tb_matricula")

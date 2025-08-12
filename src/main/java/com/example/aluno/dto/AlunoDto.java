@@ -7,6 +7,7 @@ import java.util.List;
 public record AlunoDto(
 
         String nome,
+        String telefone,
         LocalDate dataNascimento,
         List<MatriculaDto> matriculas) {
 }
