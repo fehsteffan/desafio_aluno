@@ -38,7 +38,7 @@ public class AlunoMapper {
                 new MatriculaDto(m.getCodigoMatricula(), m.getNomeCurso(),m.getDataInicio())).toList();
         return new AlunoResponse(aluno.getId(), aluno.getNome(), aluno.getTelefone(), aluno.getDataNascimento(), matriculaDtos);
 
-               
+
     }
 
 }
