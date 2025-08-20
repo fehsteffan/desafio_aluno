@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.util.List;
 
 @Service
@@ -21,24 +22,30 @@ public class AlunoService {
     private final AlunoRepository alunoRepository;
     private final AlunoMapper alunoMapper;
 
-        public AlunoService(AlunoRepository alunoRepository, AlunoMapper alunoMapper) {
+        public AlunoService(AlunoRepository alunoRepository, AlunoMapper alunoMapper){
         this.alunoRepository = alunoRepository;
         this.alunoMapper = alunoMapper;
     }
-    @GetMapping
+
     public List<AlunoResponse> listarTodos() {
             return alunoRepository.findAll().stream().map(alunoMapper::toResponse).toList();
             
     }
 
-    public List<MatriculaDto> listarMatriculas(@RequestBody long id) {
+    public AlunoResponse salvar(AlunoDto dto) {
+            Aluno aluno = alunoMapper.toEntity(dto);
+            alunoRepository.save(aluno);
+            return alunoMapper.toResponse(aluno);
+    }
+
+    public List<MatriculaDto> listarMatriculas(Long id) {
            Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Aluno nao encontrado"));
             return aluno.getMatriculas().stream().map(m -> new MatriculaDto(m.getCodigoMatricula(), m.getNomeCurso(), m.getDataInicio())).toList();
     }
 
-    @DeleteMapping
+
     public void remover(Long id) {
-        if (!alunoRepository.existsById() {
+        if (!alunoRepository.existsById(id)) {
             throw new EntityNotFoundException("ID do aluno nao encontrado");
 
         }
@@ -46,7 +53,7 @@ public class AlunoService {
 
           }
 
-          @PutMapping
+
           public AlunoResponse atualizar(Long id, AlunoDto dto) {
             Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Aluno nao encontrado"));
             aluno.setNome(dto.nome());
